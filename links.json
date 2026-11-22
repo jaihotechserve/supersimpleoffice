@@ -1,0 +1,58 @@
+{
+  "version": "0.1.0",
+  "platform": "win64",
+  "github_repo": "Jaiho-Digital/jaiho_super_simple_office",
+  "release_tag": "v0.1.0",
+  "full_suite_archive": "JaihoSuperSimpleOffice-FullSuite-v0.1.0-win64.zip",
+  "full_suite_size": "695.83 MB",
+  "ecosystem_links": [
+    {
+      "id": "official_website",
+      "label": "Jaiho Digital Website",
+      "url": "https://jaiho-digital.onrender.com/",
+      "icon": "globe",
+      "badge": "Official",
+      "primary": true
+    },
+    {
+      "id": "all_products",
+      "label": "All Products Hub",
+      "url": "https://jaiho-digital.onrender.com/hub.html",
+      "icon": "grid",
+      "badge": "Products",
+      "primary": true
+    },
+    {
+      "id": "all_links",
+      "label": "Jaiho Links Directory",
+      "url": "https://jaiholinks.vercel.app/jlc/jaihodigital.html",
+      "icon": "link",
+      "badge": "Links",
+      "primary": false
+    },
+    {
+      "id": "github_releases",
+      "label": "GitHub Releases (v0.1.0)",
+      "url": "https://github.com/Jaiho-Digital/jaiho_super_simple_office/releases/tag/v0.1.0",
+      "icon": "github",
+      "badge": "v0.1.0",
+      "primary": false
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram (@jaihodigital)",
+      "url": "https://www.instagram.com/jaihodigital",
+      "icon": "instagram",
+      "badge": "Social",
+      "primary": false
+    },
+    {
+      "id": "youtube",
+      "label": "YouTube (@jaihodigital)",
+      "url": "https://www.youtube.com/@jaihodigital",
+      "icon": "youtube",
+      "badge": "Videos",
+      "primary": false
+    }
+  ]
+}
