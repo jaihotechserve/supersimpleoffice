@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaiho Super Simple Office — 100% Offline Desktop Suite by Jaiho Digital</title>
+  <meta
+    name="description"
+    content="Calm, fast, 100% offline-first Windows desktop productivity suite by Jaiho Digital. 14 standalone apps plus the unified JaihoOffice launcher."
+  />
+  <link rel="icon" type="image/x-icon" href="./icons/jaiho_office.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="./icons/jaiho_office.ico" />
+  <style>
+    :root {
+      --bg-paper: #f6f3ec;
+      --bg-sheet: #fcfbf7;
+      --bg-card: #ffffff;
+      --bg-inset: #efeae0;
+      --ink-primary: #1b1a17;
+      --ink-secondary: #4e4b44;
+      --ink-muted: #787368;
+      --rule-strong: #1b1a17;
+      --rule-subtle: #d8d1c3;
+      --pastel-lavender: #e8e0f7;
+      --pastel-sage: #ddefe8;
+      --pastel-peach: #f4e5d9;
+      --pastel-butter: #f8ebcf;
+      --pastel-blush: #f7dfe7;
+      --shadow-sheet: 4px 4px 0px #1b1a17;
+      --shadow-sm: 2px 2px 0px #1b1a17;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+      --font-sans: "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+      --font-mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-paper);
+      background-image: radial-gradient(#d8d1c3 0.75px, transparent 0.75px);
+      background-size: 18px 18px;
+      color: var(--ink-primary);
+      font-family: var(--font-sans);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Top Editorial Masthead */
+    .masthead {
+      background: var(--bg-sheet);
+      border-bottom: 2px solid var(--rule-strong);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .masthead-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 64px;
+      padding: 8px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      background: var(--pastel-lavender);
+      border: 1.5px solid var(--rule-strong);
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .brand-mark img,
+    .brand-mark svg {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-title {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-sub {
+      font-size: 10.5px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+      display: block;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .nav-links a,
+    .nav-link-btn {
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      padding: 4px 2px;
+    }
+
+    .nav-links a:hover,
+    .nav-link-btn:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .masthead-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn.mobile-menu-btn {
+      display: none;
+    }
+
+    /* Mobile Collapsible Drawer */
+    .mobile-drawer {
+      display: none;
+      background: var(--bg-sheet);
+      border-top: 1.5px solid var(--rule-subtle);
+      padding: 14px 24px 18px;
+    }
+
+    .mobile-drawer.open {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 75vh;
+      overflow-y: auto;
+    }
+
+    @media (min-width: 921px) {
+      .mobile-drawer,
+      .mobile-drawer.open {
+        display: none !important;
+      }
+    }
+
+    .mobile-drawer a,
+    .mobile-drawer button.drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      padding: 9px 12px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--rule-subtle);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .mobile-drawer svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    /* Tactile Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 700;
+      border: 1.5px solid var(--rule-strong);
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      color: var(--ink-primary);
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+    }
+
+    .btn svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    .btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--rule-strong);
+    }
+
+    .btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px var(--rule-strong);
+    }
+
+    .btn-primary {
+      background: var(--ink-primary);
+      color: var(--bg-sheet);
+    }
+
+    .btn-lavender {
+      background: var(--pastel-lavender);
+    }
+
+    .btn-sage {
+      background: var(--pastel-sage);
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 44px 0 36px;
+      border-bottom: 2px solid var(--rule-strong);
+      background: var(--bg-sheet);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      background: var(--pastel-sage);
+      border: 1.5px solid var(--rule-strong);
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4.4vw, 50px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero-lead {
+      font-size: 15.5px;
+      color: var(--ink-secondary);
+      max-width: 58ch;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .hero-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink-secondary);
+    }
+
+    .hero-specs span strong {
+      color: var(--ink-primary);
+    }
+
+    /* Suite Bundle Box */
+    .bundle-card {
+      background: var(--bg-paper);
+      border: 2px solid var(--rule-strong);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sheet);
+      padding: 22px;
+    }
+
+    .bundle-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1.5px solid var(--rule-subtle);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .bundle-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--pastel-butter);
+      border: 1px solid var(--rule-strong);
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .bundle-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .bundle-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 7px 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule-subtle);
+      border-radius: var(--radius-sm);
+    }
+
+    .bundle-list code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-muted);
+      white-space: nowrap;
+    }
+
+    /* Interactive Desktop Showcase Stage */
+    .section {
+      padding: 44px 0;
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      font-size: clamp(22px, 3vw, 26px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      color: var(--ink-secondary);
+      font-size: 14px;
+    }
+
+    .stage-wrapper {
+      background: var(--bg-sheet);
+      border: 2px solid var(--rule-strong);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sheet);
+      overflow: hidden;
+    }
+
+    .stage-window-bar {
+      background: var(--bg-inset);
+      border-bottom: 1.5px solid var(--rule-strong);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .window-dots i {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: 1.2px solid var(--rule-strong);
+      display: inline-block;
+    }
+
+    .window-dots i:nth-child(1) { background: var(--pastel-blush); }
+    .window-dots i:nth-child(2) { background: var(--pastel-butter); }
+    .window-dots i:nth-child(3) { background: var(--pastel-sage); }
+
+    .stage-title-bar {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .stage-body {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      min-height: 360px;
+    }
+
+    .stage-info {
+      padding: 26px;
+      border-right: 1.5px solid var(--rule-subtle);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .stage-app-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .app-icon-box {
+      width: 48px;
+      height: 48px;
+      border: 1.5px solid var(--rule-strong);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--pastel-lavender);
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .app-icon-box img,
+    .app-icon-box svg {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border: 1px solid var(--rule-strong);
+      border-radius: 4px;
+      background: var(--pastel-lavender);
+      white-space: nowrap;
+    }
+
+    .badge-Documents { background: var(--pastel-lavender); }
+    .badge-Productivity { background: var(--pastel-sage); }
+    .badge-Utilities { background: var(--pastel-peach); }
+    .badge-Office { background: var(--pastel-butter); }
+
+    .feature-checklist {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 13.5px;
+    }
+
+    .feature-checklist li::before {
+      content: "✓ ";
+      font-weight: 800;
+      color: var(--ink-primary);
+    }
+
+    .stage-preview {
+      background: var(--bg-paper);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .mockup-frame {
+      background: var(--bg-card);
+      border: 1.5px solid var(--rule-strong);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .mockup-ribbon {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--rule-subtle);
+    }
+
+    .mockup-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--bg-inset);
+      border: 1px solid var(--rule-subtle);
+    }
+
+    .mockup-sheet {
+      background: var(--bg-sheet);
+      border: 1px solid var(--rule-subtle);
+      border-radius: 4px;
+      padding: 14px;
+      font-size: 13px;
+    }
+
+    /* 15-App Launcher Dock */
+    .dock-strip {
+      background: var(--bg-inset);
+      border-top: 1.5px solid var(--rule-strong);
+      padding: 12px 16px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .dock-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1.5px solid var(--rule-subtle);
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .dock-item img,
+    .dock-item svg {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .dock-item:hover,
+    .dock-item.active {
+      border-color: var(--rule-strong);
+      background: var(--pastel-butter);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Catalog Controls & Grid */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      padding: 6px 13px;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 700;
+      border: 1.5px solid var(--rule-strong);
+      border-radius: 999px;
+      background: var(--bg-sheet);
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: var(--ink-primary);
+      color: var(--bg-sheet);
+    }
+
+    .search-box {
+      padding: 9px 12px;
+      border: 1.5px solid var(--rule-strong);
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      min-width: 260px;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 18px;
+    }
+
+    .app-card {
+      background: var(--bg-sheet);
+      border: 2px solid var(--rule-strong);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sheet);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .app-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .app-card-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .app-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .app-exe {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--ink-muted);
+    }
+
+    .app-desc {
+      font-size: 13.5px;
+      color: var(--ink-secondary);
+    }
+
+    .app-meta-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      padding: 7px 10px;
+      background: var(--bg-paper);
+      border: 1px solid var(--rule-subtle);
+      border-radius: var(--radius-sm);
+    }
+
+    .app-card-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .app-card-actions .btn {
+      flex: 1;
+    }
+
+    /* Architecture & Install Guide */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .pillar-card {
+      background: var(--bg-sheet);
+      border: 1.5px solid var(--rule-strong);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .pillar-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--ink-muted);
+    }
+
+    .pillar-card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .pillar-card p {
+      font-size: 13.5px;
+      color: var(--ink-secondary);
+    }
+
+    /* Dynamic Ecosystem Chips (Powered by links.json) */
+    .ecosystem-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .eco-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 11px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--rule-strong);
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.1s ease, background-color 0.15s ease;
+    }
+
+    .eco-pill:hover {
+      background: var(--pastel-lavender);
+      transform: translate(-1px, -1px);
+    }
+
+    .eco-pill svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Modals (App Details + About Us) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(27, 26, 23, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-sheet);
+      border: 2px solid var(--rule-strong);
+      border-radius: var(--radius-md);
+      box-shadow: 6px 6px 0px var(--rule-strong);
+      max-width: 660px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1.5px solid var(--rule-subtle);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 16px 0 18px;
+    }
+
+    .about-tile {
+      background: var(--bg-paper);
+      border: 1.5px solid var(--rule-subtle);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-size: 13px;
+    }
+
+    .about-tile strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13.5px;
+    }
+
+    /* Rich Editorial Footer */
+    .footer {
+      border-top: 2px solid var(--rule-strong);
+      background: var(--bg-sheet);
+      padding: 40px 0 28px;
+      margin-top: 40px;
+      font-size: 13.5px;
+      color: var(--ink-secondary);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr 1.15fr;
+      gap: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1.5px solid var(--rule-subtle);
+    }
+
+    .footer-heading {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-primary);
+      margin-bottom: 12px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: grid;
+      gap: 9px;
+    }
+
+    .footer-links a,
+    .footer-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      font: inherit;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+    }
+
+    .footer-links svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      color: var(--ink-primary);
+    }
+
+    .footer-links a:hover,
+    .footer-link-btn:hover {
+      color: var(--ink-primary);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .footer-bottom {
+      padding-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12.5px;
+    }
+
+    /* Tablet & Mobile Breakpoints */
+    @media (max-width: 920px) {
+      .hero-grid,
+      .stage-body {
+        grid-template-columns: 1fr;
+      }
+
+      .stage-info {
+        border-right: none;
+        border-bottom: 1.5px solid var(--rule-subtle);
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .btn.mobile-menu-btn {
+        display: inline-flex;
+        width: auto;
+        flex: 0 0 auto;
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .masthead-actions .hide-mobile {
+        display: none;
+      }
+
+      .hero {
+        padding: 32px 0 28px;
+      }
+
+      .hero-actions .btn,
+      .stage-info .btn,
+      .search-box {
+        width: 100%;
+      }
+
+      .apps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .modal-box {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container masthead-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark" id="brandLogoSlot"></span>
+        <span class="brand-text">
+          <span class="brand-title">Jaiho Super Simple Office</span>
+          <span class="brand-sub">By Jaiho Digital • v0.1.0 Win64</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#showcase">Interactive Preview</a>
+        <a href="#catalog">All 15 Apps</a>
+        <a href="#install">How to Run</a>
+      </nav>
+
+      <div class="masthead-actions">
+        <button type="button" class="btn btn-sm hide-mobile" data-open-about>About Us</button>
+        <a id="navFullSuiteBtn" href="#" class="btn btn-primary btn-sm">Download Suite</a>
+        <button
+          type="button"
+          id="mobileMenuBtn"
+          class="btn btn-sm mobile-menu-btn"
+          aria-expanded="false"
+          aria-controls="mobileDrawer"
+        >
+          Menu
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileDrawer" class="mobile-drawer">
+      <a href="#showcase" data-close-drawer>Interactive Preview</a>
+      <a href="#catalog" data-close-drawer>All 15 Apps</a>
+      <a href="#install" data-close-drawer>How to Run on Windows</a>
+      <a href="#architecture" data-close-drawer>Local-First Design</a>
+      <button type="button" class="drawer-link" data-open-about data-close-drawer>About Us — Jaiho Digital</button>
+      <div id="mobileDrawerDynamicLinks" style="display: grid; gap: 8px;"></div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="top" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="kicker">100% Offline • Zero Cloud • Windows 10 &amp; 11 (x64)</div>
+        <h1>A calm, complete desktop office suite that stays on your machine.</h1>
+        <p class="hero-lead">
+          14 standalone productivity applications plus the unified <strong>JaihoOffice</strong> launcher.
+          Download only the single <code>.exe</code> tool you need (~45 MB), or grab the complete suite
+          with atomic crash-safe file writes, SQLite WAL storage, and same-network LAN chat.
+        </p>
+
+        <div class="hero-actions">
+          <a id="heroFullSuiteBtn" href="#" class="btn btn-primary">
+            Download Full Suite ZIP (695.83 MB)
+          </a>
+          <a href="#catalog" class="btn btn-lavender">Browse Individual Apps</a>
+          <a id="heroChecksumsBtn" href="#" class="btn">SHA256SUMS.txt</a>
+        </div>
+
+        <div class="hero-specs">
+          <span><strong>15</strong> Executables</span>
+          <span><strong>0</strong> Subscriptions</span>
+          <span><strong>100%</strong> Offline SQLite &amp; Native Formats</span>
+        </div>
+      </div>
+
+      <aside class="bundle-card">
+        <div class="bundle-header">
+          <strong>Release v0.1.0 — Windows x64</strong>
+          <span class="bundle-tag">Portable ZIPs</span>
+        </div>
+        <ul class="bundle-list">
+          <li>
+            <span><strong>JaihoOffice</strong> (Unified Hub)</span>
+            <code>44.72 MB</code>
+          </li>
+          <li>
+            <span><strong>Documents</strong> (Writer, Sheets, Slides, PDF, Scan, OCR)</span>
+            <code>6 Apps</code>
+          </li>
+          <li>
+            <span><strong>Productivity</strong> (Notes, Tasks, Calendar, Focus)</span>
+            <code>4 Apps</code>
+          </li>
+          <li>
+            <span><strong>Utilities &amp; LAN</strong> (Calc, Units, Convert, Chat)</span>
+            <code>4 Apps</code>
+          </li>
+        </ul>
+        <a id="cardReleasesBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-sage" style="width: 100%;">
+          Open GitHub Releases Page ↗
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Interactive Desktop Showcase Stage -->
+  <section id="showcase" class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Interactive Suite Stage</h2>
+          <p class="section-sub">Tap any app in the dock below to inspect its workspace, features, and download size.</p>
+        </div>
+      </div>
+
+      <div class="stage-wrapper">
+        <div class="stage-window-bar">
+          <div class="window-dots"><i></i><i></i><i></i></div>
+          <div id="stageWindowTitle" class="stage-title-bar">SimpleWriter.exe — Jaiho Super Simple Office</div>
+          <span id="stageSizeBadge" class="badge">45.11 MB ZIP</span>
+        </div>
+
+        <div class="stage-body">
+          <div class="stage-info">
+            <div>
+              <div class="stage-app-head">
+                <div class="app-icon-box" id="stageIconBox"></div>
+                <div>
+                  <span id="stageCategoryBadge" class="badge">Documents</span>
+                  <h3 id="stageAppName" style="font-size: 22px; margin-top: 4px;">SimpleWriter</h3>
+                </div>
+              </div>
+              <p id="stageAppDesc" style="color: var(--ink-secondary); font-size: 14px;"></p>
+              <ul id="stageFeatureList" class="feature-checklist"></ul>
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <a id="stageDownloadBtn" href="#" class="btn btn-primary">Download ZIP</a>
+              <button id="stageDetailsBtn" type="button" class="btn">Full Specs &amp; Formats</button>
+            </div>
+          </div>
+
+          <div class="stage-preview">
+            <div class="mockup-frame">
+              <div id="stageMockupRibbon" class="mockup-ribbon"></div>
+              <div id="stageMockupSheet" class="mockup-sheet"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="launcherDock" class="dock-strip" role="tablist" aria-label="Suite Application Dock"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full 15-App Storefront Catalog -->
+  <section id="catalog" class="section" style="padding-top: 12px;">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">All Applications in the Suite</h2>
+          <p class="section-sub">Every app runs independently with zero shared runtime bloat or internet dependency.</p>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div id="categoryTabs" class="filter-tabs">
+          <button class="tab-btn active" data-cat="All">All (15)</button>
+          <button class="tab-btn" data-cat="Documents">Documents (6)</button>
+          <button class="tab-btn" data-cat="Productivity">Productivity (4)</button>
+          <button class="tab-btn" data-cat="Utilities">Utilities (3)</button>
+          <button class="tab-btn" data-cat="Office">LAN &amp; Launcher (2)</button>
+        </div>
+
+        <input
+          id="appSearchInput"
+          class="search-box"
+          type="search"
+          placeholder="Search apps, formats (.docx, .pdf, .xlsx)..."
+          aria-label="Search applications"
+        />
+      </div>
+
+      <div id="appsGrid" class="apps-grid"></div>
+    </div>
+  </section>
+
+  <!-- Installation & Verification Guide -->
+  <section id="install" class="section" style="padding-top: 12px;">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">How to Download &amp; Run on Windows</h2>
+          <p class="section-sub">No Python installation or administrator rights required.</p>
+        </div>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-num">STEP 01</div>
+          <h3>Download Individual or Full ZIP</h3>
+          <p>
+            Download a single app archive (~45 MB) or the complete <strong>FullSuite</strong> ZIP (695.83 MB)
+            directly from GitHub Releases.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-num">STEP 02</div>
+          <h3>Extract the Folder First</h3>
+          <p>
+            Right-click the downloaded <code>.zip</code> file and choose <strong>Extract All...</strong> so the
+            executable stays alongside its bundled <code>_internal</code> and <code>resources</code> folders.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-num">STEP 03</div>
+          <h3>Launch &amp; Verify Checksums</h3>
+          <p>
+            Double-click <code>JaihoOffice.exe</code> or any individual app. If Windows SmartScreen prompts on first
+            launch, click <strong>More info → Run anyway</strong>. Verify integrity anytime via <code>SHA256SUMS.txt</code>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Engineering Pillars -->
+  <section id="architecture" class="section" style="padding-top: 12px;">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Local-First Engineering Guarantees</h2>
+          <p class="section-sub">Designed for reliability, speed, and complete data ownership.</p>
+        </div>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-num">01 / CRASH-SAFE STORAGE</div>
+          <h3>Atomic Writes + Auto Backups</h3>
+          <p>
+            Every file save writes to a temporary file, flushes with <code>fsync</code>, rotates a timestamped
+            backup in <code>%LOCALAPPDATA%</code>, and atomically replaces the target.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-num">02 / SQLITE WAL MODE</div>
+          <h3>Fast Local Databases</h3>
+          <p>
+            Notes, tasks, calendar events, focus logs, and LAN chat histories persist in local SQLite Write-Ahead
+            Logging databases for instant search and zero corruption.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-num">03 / SAME-NETWORK LAN CHAT</div>
+          <h3>Zero-Cloud Team Messaging</h3>
+          <p>
+            <strong>SimpleChat</strong> uses salted PBKDF2-HMAC-SHA256 user login, subnet/network policy checks,
+            1-on-1 DMs, group rooms, voice clips, and file transfers strictly over your local network.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-num">04 / OPEN FILE FORMATS</div>
+          <h3>Standard Interoperability</h3>
+          <p>
+            Work natively with standard <code>.docx</code>, <code>.xlsx</code>, <code>.pptx</code>, <code>.pdf</code>,
+            <code>.ics</code>, <code>.md</code>, <code>.csv</code>, and <code>.json</code> files without lock-in.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Detail Modal -->
+  <div id="detailModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <div class="modal-top">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="app-icon-box" id="modalIconBox"></div>
+          <div>
+            <h3 id="modalTitle" style="font-size: 20px;"></h3>
+            <span id="modalExe" class="app-exe"></span>
+          </div>
+        </div>
+        <button id="modalCloseBtn" type="button" class="btn btn-sm">Close</button>
+      </div>
+
+      <p id="modalDesc" style="color: var(--ink-secondary); margin-bottom: 14px;"></p>
+      <div id="modalFormats" class="app-meta-strip" style="margin-bottom: 14px;"></div>
+      <ul id="modalFeatures" class="feature-checklist" style="margin-bottom: 20px;"></ul>
+
+      <div style="display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;">
+        <a id="modalDownloadBtn" href="#" class="btn btn-primary">Download Release ZIP</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Us Popup Modal -->
+  <div id="aboutModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+    <div class="modal-box">
+      <div class="modal-top">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="app-icon-box" id="aboutIconBox" style="background: var(--pastel-sage);"></div>
+          <div>
+            <h3 id="aboutModalTitle" style="font-size: 20px;">About Jaiho Super Simple Office</h3>
+            <span class="app-exe">A Flagship Product by Jaiho Digital</span>
+          </div>
+        </div>
+        <button id="aboutCloseBtn" type="button" class="btn btn-sm">Close</button>
+      </div>
+
+      <p style="color: var(--ink-secondary); font-size: 14px; margin-bottom: 12px;">
+        <strong>Jaiho Super Simple Office</strong> was built by <strong>Jaiho Digital</strong> with a single goal:
+        everyday office tools should be fast, calm, private, and yours to keep—without forced cloud accounts,
+        recurring subscriptions, or bloated Electron wrappers.
+      </p>
+
+      <p style="color: var(--ink-secondary); font-size: 14px;">
+        Every application in the suite runs locally on Windows 10 and 11, saves to standard interoperable file
+        formats (<code>.docx</code>, <code>.xlsx</code>, <code>.pptx</code>, <code>.pdf</code>, <code>.ics</code>),
+        and protects your work with atomic disk writes and automatic local backups.
+      </p>
+
+      <div class="about-grid">
+        <div class="about-tile">
+          <strong>100% Local &amp; Private</strong>
+          Zero telemetry, zero cloud tracking, and full offline functionality—including local LAN messaging via SimpleChat.
+        </div>
+        <div class="about-tile">
+          <strong>Modular Architecture</strong>
+          Install individual ~45 MB standalone executables or run the entire 15-app suite from the JaihoOffice hub.
+        </div>
+        <div class="about-tile">
+          <strong>Built by Jaiho Digital</strong>
+          Crafted in Bengaluru, India as part of the Jaiho Digital independent software ecosystem.
+        </div>
+      </div>
+
+      <div style="margin-bottom: 10px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink-muted);">
+        Explore Jaiho Digital Ecosystem
+      </div>
+      <div id="aboutEcosystemLinks" class="ecosystem-pills"></div>
+    </div>
+  </div>
+
+  <!-- Rich Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <span class="brand-mark" id="footerLogoSlot" style="width: 28px; height: 28px;"></span>
+            <strong style="color: var(--ink-primary); font-size: 15px;">Jaiho Super Simple Office</strong>
+          </div>
+          <p style="font-size: 13.5px; max-width: 44ch; margin-bottom: 14px;">
+            14 standalone offline productivity applications plus the unified JaihoOffice launcher for Windows.
+            Designed and engineered by <strong>Jaiho Digital</strong>.
+          </p>
+          <div id="footerPrimaryButtons" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+        </div>
+
+        <div>
+          <div class="footer-heading">Suite &amp; Downloads</div>
+          <ul class="footer-links">
+            <li><a id="footerFullSuiteLink" href="#">Full Suite ZIP (695.83 MB)</a></li>
+            <li><a href="#catalog">Individual App Downloads</a></li>
+            <li><a id="footerChecksumsLink" href="#">SHA256SUMS.txt Manifest</a></li>
+            <li><a href="#install">Windows Installation Guide</a></li>
+            <li>
+              <button type="button" class="footer-link-btn" data-open-about>
+                About Jaiho Super Simple Office
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Jaiho Digital &amp; Social</div>
+          <ul id="footerDynamicLinks" class="footer-links"></ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 <strong>Jaiho Digital</strong>. All rights reserved.</div>
+        <div>Windows 10 / 11 (x64) • 100% Offline-First Software</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // FALLBACK SITE CONFIG (Automatically overridden by ./links.json when served)
+    // =========================================================================
+    const DEFAULT_LINKS_CONFIG = {
+      version: "0.1.0",
+      platform: "win64",
+      github_repo: "Jaiho-Digital/jaiho_super_simple_office",
+      release_tag: "v0.1.0",
+      full_suite_archive: "JaihoSuperSimpleOffice-FullSuite-v0.1.0-win64.zip",
+      full_suite_size: "695.83 MB",
+      ecosystem_links: [
+        {
+          id: "official_website",
+          label: "Jaiho Digital Website",
+          url: "https://jaiho-digital.onrender.com/",
+          icon: "globe",
+          badge: "Official",
+          primary: true
+        },
+        {
+          id: "all_products",
+          label: "All Products Hub",
+          url: "https://jaiho-digital.onrender.com/hub.html",
+          icon: "grid",
+          badge: "Products",
+          primary: true
+        },
+        {
+          id: "all_links",
+          label: "Jaiho Links Directory",
+          url: "https://jaiholinks.vercel.app/jlc/jaihodigital.html",
+          icon: "link",
+          badge: "Links",
+          primary: false
+        },
+        {
+          id: "github_releases",
+          label: "GitHub Releases (v0.1.0)",
+          url: "https://github.com/Jaiho-Digital/jaiho_super_simple_office/releases/tag/v0.1.0",
+          icon: "github",
+          badge: "v0.1.0",
+          primary: false
+        },
+        {
+          id: "instagram",
+          label: "Instagram (@jaihodigital)",
+          url: "https://www.instagram.com/jaihodigital",
+          icon: "instagram",
+          badge: "Social",
+          primary: false
+        },
+        {
+          id: "youtube",
+          label: "YouTube (@jaihodigital)",
+          url: "https://www.youtube.com/@jaihodigital",
+          icon: "youtube",
+          badge: "Videos",
+          primary: false
+        }
+      ]
+    };
+
+    let SITE_CONFIG = { ...DEFAULT_LINKS_CONFIG };
+
+    // Built-in SVG fallbacks if any ./icons/*.ico file is missing
+    const APP_SVGS = {
+      jaiho_office: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>`,
+      simple_writer: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>`,
+      simple_sheets: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="9" x2="9" y2="21"/><line x1="15" y1="9" x2="15" y2="21"/></svg>`,
+      simple_slides: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><polygon points="10 7 15 10 10 13 10 7"/></svg>`,
+      simple_pdf: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 15h2a1.5 1.5 0 0 0 0-3H8v6"/></svg>`,
+      simple_scan: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
+      simple_ocr: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="3 2"/><path d="M8 16l4-8 4 8"/><line x1="9.5" y1="13" x2="14.5" y2="13"/></svg>`,
+      simple_notes: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>`,
+      simple_tasks: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+      simple_calendar: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+      simple_focus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><polyline points="12 9 12 13 15 15"/><line x1="9" y1="2" x2="15" y2="2"/></svg>`,
+      simple_calculator: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8" y2="11.01"/><line x1="12" y1="11" x2="12" y2="11.01"/><line x1="16" y1="11" x2="16" y2="11.01"/><line x1="8" y1="16" x2="8" y2="16.01"/><line x1="12" y1="16" x2="12" y2="16.01"/><line x1="16" y1="16" x2="16" y2="16.01"/></svg>`,
+      simple_units: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l4 4-4 4"/><path d="M20 7H4"/><path d="M8 21l-4-4 4-4"/><path d="M4 17h16"/></svg>`,
+      simple_convert: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>`,
+      simple_chat: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="9" cy="10" r="1"/><circle cx="12" cy="10" r="1"/><circle cx="15" cy="10" r="1"/></svg>`
+    };
+
+    const SOCIAL_SVGS = {
+      globe: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+      grid: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>`,
+      link: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+      instagram: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+      youtube: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>`,
+      github: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>`
+    };
+
+    function getAppSvg(appId) {
+      return APP_SVGS[appId] || APP_SVGS.jaiho_office;
+    }
+
+    function renderAppIcon(appId, label = "") {
+      const fallbackSvg = getAppSvg(appId);
+      return `<img src="./icons/${appId}.ico" alt="${label}" onerror="this.outerHTML = decodeURIComponent('${encodeURIComponent(fallbackSvg)}')" />`;
+    }
+
+    function getSocialSvg(iconKey) {
+      return SOCIAL_SVGS[iconKey] || SOCIAL_SVGS.link;
+    }
+
+    function getRepoUrl() {
+      return `https://github.com/${SITE_CONFIG.github_repo}`;
+    }
+
+    function getReleaseBaseUrl() {
+      return `${getRepoUrl()}/releases/download/${SITE_CONFIG.release_tag}`;
+    }
+
+    function getReleasesPageUrl() {
+      return `${getRepoUrl()}/releases/tag/${SITE_CONFIG.release_tag}`;
+    }
+
+    function getArchiveUrl(archiveName) {
+      return `${getReleaseBaseUrl()}/${archiveName}`;
+    }
+
+    const APPS = [
+      {
+        id: "jaiho_office",
+        name: "JaihoOffice",
+        exe: "JaihoOffice.exe",
+        category: "Office",
+        badgeLabel: "Suite Launcher",
+        size: "44.72 MB",
+        archive: "JaihoSuperSimpleOffice-JaihoOffice-v0.1.0-win64.zip",
+        formats: "Launches all 14 standalone .exe modules",
+        desc: "Unified Soft Modern Pastel suite hub with category tabs, instant search, and one-click process launching for every app.",
+        features: [
+          "Instant search & category filtering across all 14 apps",
+          "Automatically detects packaged sibling .exe binaries",
+          "Persistent window geometry and unified theme settings",
+          "Zero background services when closed"
+        ],
+        ribbon: ["All Apps (14)", "Documents", "Productivity", "Utilities", "LAN Chat"],
+        previewHtml: "<strong>Suite Hub Ready</strong><br/>Click any module card to launch SimpleWriter, SimpleSheets, SimplePDF, SimpleScan, SimpleChat, and more in independent processes."
+      },
+      {
+        id: "simple_writer",
+        name: "SimpleWriter",
+        exe: "SimpleWriter.exe",
+        category: "Documents",
+        badgeLabel: "Documents",
+        size: "45.11 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleWriter-v0.1.0-win64.zip",
+        formats: ".docx (Default), .pdf, .md, .html, .txt",
+        desc: "Multi-page paginated word processor with live headings outline, floating selection toolbar, tables, and distraction-free Zen mode.",
+        features: [
+          "True paginated US Letter sheets with live Page X of Y telemetry",
+          "Native .docx save/load plus one-click PDF & Markdown export",
+          "Docked Headings Outline sidebar and floating selection mini-bar",
+          "Inline Find & Replace, tables, images, and F11 Zen mode"
+        ],
+        ribbon: ["Normal Text", "Inter 12pt", "B  I  U  S", "+ Page Break", "Export PDF"],
+        previewHtml: "<strong>Page 1 of 2 — Executive Summary.docx</strong><br/>Clean Soft Modern Pastel paper canvas with automatic page overflow, heading navigation, and atomic crash-safe saves."
+      },
+      {
+        id: "simple_sheets",
+        name: "SimpleSheets",
+        exe: "SimpleSheets.exe",
+        category: "Documents",
+        badgeLabel: "Documents",
+        size: "45.13 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleSheets-v0.1.0-win64.zip",
+        formats: ".xlsx (Default), .csv, .tsv",
+        desc: "Multi-sheet spreadsheet studio with built-in formula evaluation, number formatting, cell styling, and instant chart visualization.",
+        features: [
+          "Supports SUM, AVERAGE, MIN, MAX, COUNT, IF, VLOOKUP & math formulas",
+          "Multi-tab workbooks with full .xlsx and .csv import/export",
+          "Currency, percentage, date, and custom number formatting",
+          "Built-in bar/line data preview and keyboard grid navigation"
+        ],
+        ribbon: ["=SUM(B2:B14)", "$ Currency", "% Percent", "+ Sheet", "Export .xlsx"],
+        previewHtml: "<strong>Q4 Budget.xlsx — Sheet 1</strong><br/>A1: Item | B1: Planned | C1: Actual | D1: Variance (=C2-B2) → Real-time dependency recalculation."
+      },
+      {
+        id: "simple_slides",
+        name: "SimpleSlides",
+        exe: "SimpleSlides.exe",
+        category: "Documents",
+        badgeLabel: "Documents",
+        size: "45.12 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleSlides-v0.1.0-win64.zip",
+        formats: ".pptx (Default), .pdf",
+        desc: "Presentation deck builder with curated pastel slide themes, reorderable filmstrip, speaker notes, and full-screen presenter mode.",
+        features: [
+          "Exports standard PowerPoint (.pptx) and crisp PDF handouts",
+          "Reorderable thumbnail filmstrip with drag/move controls",
+          "Per-slide speaker notes and 16:9 widescreen canvas",
+          "Distraction-free keyboard-driven full-screen slideshow mode"
+        ],
+        ribbon: ["+ New Slide", "Pastel Theme", "Speaker Notes", "Present (F5)", "Export .pptx"],
+        previewHtml: "<strong>Slide 1 of 8 — Product Architecture</strong><br/>16:9 widescreen pastel slide canvas with title, subtitle, bullet blocks, and synchronized presenter notes."
+      },
+      {
+        id: "simple_pdf",
+        name: "SimplePDF",
+        exe: "SimplePDF.exe",
+        category: "Documents",
+        badgeLabel: "Documents",
+        size: "44.87 MB",
+        archive: "JaihoSuperSimpleOffice-SimplePDF-v0.1.0-win64.zip",
+        formats: ".pdf (Read, Organize, Merge, Split, Annotate)",
+        desc: "Fast offline PDF reader, page organizer, and non-destructive annotator with thumbnail reordering, rotation, and text search.",
+        features: [
+          "High-DPI page rendering with smooth zoom and full-text search",
+          "Page organizer: rotate, duplicate, delete, reorder & split pages",
+          "Highlight, sticky note, and stamp annotations saved cleanly",
+          "Merge multiple PDFs offline with zero file-size upload limits"
+        ],
+        ribbon: ["Zoom 110%", "Rotate 90°", "Highlight", "Split PDF", "Save PDF"],
+        previewHtml: "<strong>Contract_Review.pdf — 14 Pages</strong><br/>Thumbnail sidebar + crisp vector rendering + instant keyword search across all pages."
+      },
+      {
+        id: "simple_scan",
+        name: "SimpleScan",
+        exe: "SimpleScan.exe",
+        category: "Documents",
+        badgeLabel: "Documents",
+        size: "54.38 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleScan-v0.1.0-win64.zip",
+        formats: "WIA Scanners, Cameras, Images → .pdf, .png, .jpg",
+        desc: "Document scanner studio supporting Windows WIA scanners, document cameras, auto-deskew, interactive crop, and multi-page PDF assembly.",
+        features: [
+          "Direct Windows WIA flatbed/ADF scanner & webcam capture",
+          "Interactive drag-to-crop handles and automatic angle deskew",
+          "Magic Color & B&W document contrast cleanup filters",
+          "Assemble scanned batch pages directly into a multi-page PDF"
+        ],
+        ribbon: ["Scan WIA", "Auto-Deskew", "Crop", "Magic Color", "Save Multi-PDF"],
+        previewHtml: "<strong>Scan Batch (3 Pages)</strong><br/>Live document edge detection, Magic Color whiteboard/paper enhancement, and one-click PDF export."
+      },
+      {
+        id: "simple_ocr",
+        name: "SimpleOCR",
+        exe: "SimpleOCR.exe",
+        category: "Documents",
+        badgeLabel: "Documents",
+        size: "45.22 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleOCR-v0.1.0-win64.zip",
+        formats: ".png, .jpg, .webp, .pdf → .txt, .md, .docx",
+        desc: "Offline optical character recognition for images and scanned PDFs with region-of-interest (ROI) selection and multi-engine support.",
+        features: [
+          "Draw custom ROI selection boxes to extract specific regions",
+          "Supports local NanoOCR, Windows Native WinRT OCR & Tesseract",
+          "Contrast preprocessing boost for low-contrast scans",
+          "Batch extract multi-page PDFs into .txt, .md, or .docx"
+        ],
+        ribbon: ["Open Image/PDF", "Select ROI", "Contrast Boost", "Extract Text", "Export .docx"],
+        previewHtml: "<strong>Invoice_Scan.png → Extracted Text</strong><br/>Interactive bounding box over source image paired with editable extracted text output."
+      },
+      {
+        id: "simple_notes",
+        name: "SimpleNotes",
+        exe: "SimpleNotes.exe",
+        category: "Productivity",
+        badgeLabel: "Productivity",
+        size: "45.51 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleNotes-v0.1.0-win64.zip",
+        formats: "SQLite WAL + .md / .txt Export",
+        desc: "Local-first Markdown & note workspace backed by SQLite WAL with tags, pinned notes, instant search, and zero cloud sync delays.",
+        features: [
+          "Instant full-text filtering across titles, tags, and note bodies",
+          "Pin priority notes, organize with tags, and archive old drafts",
+          "Backed by crash-safe SQLite Write-Ahead Logging storage",
+          "Export any note to clean Markdown (.md) or plain text"
+        ],
+        ribbon: ["+ New Note", "Pin Note", "#tags", "Search", "Export .md"],
+        previewHtml: "<strong>Architecture Notes #design #offline</strong><br/>Three-pane notebook list, live Markdown editor, and instant local SQLite persistence."
+      },
+      {
+        id: "simple_tasks",
+        name: "SimpleTasks",
+        exe: "SimpleTasks.exe",
+        category: "Productivity",
+        badgeLabel: "Productivity",
+        size: "45.50 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleTasks-v0.1.0-win64.zip",
+        formats: "SQLite WAL + .json / .csv Export",
+        desc: "Keyboard-driven task and project planner with smart views (Today, Upcoming, High Priority, Completed), due dates, and subtasks.",
+        features: [
+          "Smart sidebar filters: Inbox, Today, Upcoming, Priority & Completed",
+          "Priority badges, due-date tracking, project tags, and notes",
+          "Fast keyboard task entry and one-click completion toggles",
+          "100% local SQLite database with zero account sign-in"
+        ],
+        ribbon: ["+ Add Task", "Today", "Upcoming", "High Priority", "Completed"],
+        previewHtml: "<strong>Today — 4 Active Tasks</strong><br/>[✓] Package v0.1.0 release ZIPs  •  [ ] Publish static storefront  •  [ ] Tag GitHub release"
+      },
+      {
+        id: "simple_calendar",
+        name: "SimpleCalendar",
+        exe: "SimpleCalendar.exe",
+        category: "Productivity",
+        badgeLabel: "Productivity",
+        size: "45.56 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleCalendar-v0.1.0-win64.zip",
+        formats: "SQLite WAL + Standard .ics (iCalendar)",
+        desc: "Offline monthly, weekly, and agenda calendar with color-coded categories, recurring events, and full .ics import/export.",
+        features: [
+          "Monthly grid, weekly schedule, and daily agenda views",
+          "Import and export standard .ics iCalendar files seamlessly",
+          "Color-coded pastel event categories and local reminders",
+          "Offline SQLite persistence with automatic backups"
+        ],
+        ribbon: ["Month", "Week", "Agenda", "+ New Event", "Import/Export .ics"],
+        previewHtml: "<strong>November 2026 — Local Schedule</strong><br/>Clean pastel calendar grid with daily event agenda sidebar and standard .ics interoperability."
+      },
+      {
+        id: "simple_focus",
+        name: "SimpleFocus",
+        exe: "SimpleFocus.exe",
+        category: "Productivity",
+        badgeLabel: "Productivity",
+        size: "45.53 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleFocus-v0.1.0-win64.zip",
+        formats: "SQLite WAL Session History",
+        desc: "Calm Pomodoro focus timer and deep-work session tracker with customizable intervals, task labels, and daily streak analytics.",
+        features: [
+          "Customizable Focus (25m), Short Break (5m), and Long Break (15m)",
+          "Visual circular progress ring with gentle desktop notifications",
+          "Logs completed deep-work sessions to local SQLite history",
+          "Tracks daily focus minutes and completed session streaks"
+        ],
+        ribbon: ["25:00 Focus", "05:00 Break", "Start / Pause", "Session Log"],
+        previewHtml: "<strong>Deep Work Session — 25:00</strong><br/>Minimalist pastel timer ring, active task label, and daily completed Pomodoro counter."
+      },
+      {
+        id: "simple_calculator",
+        name: "SimpleCalculator",
+        exe: "SimpleCalculator.exe",
+        category: "Utilities",
+        badgeLabel: "Utilities",
+        size: "44.68 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleCalculator-v0.1.0-win64.zip",
+        formats: "Standard, Scientific & Programmer Modes",
+        desc: "Fast desktop calculator featuring Standard, Scientific, and Programmer (HEX/DEC/OCT/BIN) modes with a clickable history tape.",
+        features: [
+          "Three modes: Standard, Scientific (trig/log/powers), and Programmer",
+          "Live expression preview and scrollable calculation history tape",
+          "Full keyboard numpad & operator shortcut support",
+          "One-click result copy to clipboard"
+        ],
+        ribbon: ["Standard", "Scientific", "Programmer", "History Tape", "Copy"],
+        previewHtml: "<strong>Scientific Mode — 1,024 × 64 = 65,536</strong><br/>Tactile pastel keypad grid paired with persistent calculation tape."
+      },
+      {
+        id: "simple_units",
+        name: "SimpleUnits",
+        exe: "SimpleUnits.exe",
+        category: "Utilities",
+        badgeLabel: "Utilities",
+        size: "44.68 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleUnits-v0.1.0-win64.zip",
+        formats: "11 Measurement Categories",
+        desc: "Instant offline unit converter covering Length, Mass, Temperature, Area, Volume, Speed, Time, Digital Storage, Pressure, and Energy.",
+        features: [
+          "Real-time bidirectional conversion as you type",
+          "11 engineering & everyday categories with precision formatting",
+          "Quick unit swap button and all-units comparison table",
+          "100% offline with zero network latency"
+        ],
+        ribbon: ["Length", "Mass", "Temperature", "Data Storage", "Swap Units"],
+        previewHtml: "<strong>Digital Storage: 695.83 MB = 0.6795 GiB</strong><br/>Instant conversion across Bytes, KB, MB, GB, TB, KiB, MiB, and GiB."
+      },
+      {
+        id: "simple_convert",
+        name: "SimpleConvert",
+        exe: "SimpleConvert.exe",
+        category: "Utilities",
+        badgeLabel: "Utilities",
+        size: "45.26 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleConvert-v0.1.0-win64.zip",
+        formats: ".docx, .pdf, .md, .html, .txt, .xlsx, .csv, .json, .png, .jpg, .webp, .ico",
+        desc: "Batch file format converter across Documents, Spreadsheets, and Images with queue progress and atomic output writes.",
+        features: [
+          "Batch convert multiple files simultaneously in one queue",
+          "Documents (.docx, .md, .html, .txt, .pdf) & Data (.xlsx, .csv, .json)",
+          "Image conversion (.png, .jpg, .webp, .bmp, .ico) offline",
+          "Per-file status badges and custom output folder selection"
+        ],
+        ribbon: ["+ Add Files", "Target Format", "Batch Queue", "Convert All"],
+        previewHtml: "<strong>Batch Queue — 5 Files Ready</strong><br/>report.md → report.docx  •  data.csv → data.xlsx  •  logo.png → logo.ico"
+      },
+      {
+        id: "simple_chat",
+        name: "SimpleChat",
+        exe: "SimpleChat.exe",
+        category: "Office",
+        badgeLabel: "LAN Messaging",
+        size: "54.43 MB",
+        archive: "JaihoSuperSimpleOffice-SimpleChat-v0.1.0-win64.zip",
+        formats: "Same-Network LAN TCP Relay + SQLite WAL + WAV/Files",
+        desc: "Local same-network (LAN) chat, voice clip, and file sharing app with salted PBKDF2 username + password login, subnet policy checks, 1-on-1 DMs, and group rooms.",
+        features: [
+          "Username + password auth with salted PBKDF2-HMAC-SHA256 hashing",
+          "Same-network policy guard (private LAN IP, subnet prefix & room key)",
+          "1-on-1 direct messages and multi-member network group creation",
+          "Send text messages, voice clips with playback, and local file attachments"
+        ],
+        ribbon: ["Same-Network OK", "+ New Group", "Voice Clip", "Share File", "LAN Relay"],
+        previewHtml: "<strong>#LAN General (192.168.1.0/24)</strong><br/>@arshvir: Shared build_notes.pdf  •  Voice clip (2.0s)  •  Zero cloud servers."
+      }
+    ];
+
+    let activeAppId = "simple_writer";
+    let activeCategory = "All";
+
+    function renderDock() {
+      const dock = document.getElementById("launcherDock");
+      dock.innerHTML = APPS.map((app) => `
+        <button
+          type="button"
+          class="dock-item ${app.id === activeAppId ? "active" : ""}"
+          data-app-id="${app.id}"
+          role="tab"
+          aria-selected="${app.id === activeAppId}"
+        >
+          ${renderAppIcon(app.id, app.name)}
+          <span>${app.name}</span>
+        </button>
+      `).join("");
+
+      dock.querySelectorAll(".dock-item").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          activeAppId = btn.getAttribute("data-app-id");
+          renderDock();
+          renderStage();
+        });
+      });
+    }
+
+    function renderStage() {
+      const app = APPS.find((item) => item.id === activeAppId) || APPS[0];
+      document.getElementById("stageWindowTitle").textContent = `${app.exe} — Jaiho Super Simple Office`;
+      document.getElementById("stageSizeBadge").textContent = `${app.size} ZIP`;
+      document.getElementById("stageCategoryBadge").textContent = app.badgeLabel;
+      document.getElementById("stageCategoryBadge").className = `badge badge-${app.category}`;
+      document.getElementById("stageAppName").textContent = app.name;
+      document.getElementById("stageAppDesc").textContent = app.desc;
+      document.getElementById("stageIconBox").innerHTML = renderAppIcon(app.id, app.name);
+
+      document.getElementById("stageFeatureList").innerHTML = app.features
+        .map((feat) => `<li>${feat}</li>`)
+        .join("");
+
+      const dlBtn = document.getElementById("stageDownloadBtn");
+      dlBtn.href = getArchiveUrl(app.archive);
+      dlBtn.textContent = `Download ${app.name} (${app.size})`;
+
+      document.getElementById("stageDetailsBtn").onclick = () => openDetailModal(app);
+
+      document.getElementById("stageMockupRibbon").innerHTML = app.ribbon
+        .map((pill) => `<span class="mockup-pill">${pill}</span>`)
+        .join("");
+      document.getElementById("stageMockupSheet").innerHTML = app.previewHtml;
+    }
+
+    function renderCatalog() {
+      const query = document.getElementById("appSearchInput").value.trim().toLowerCase();
+      const filtered = APPS.filter((app) => {
+        const matchesCat = activeCategory === "All" || app.category === activeCategory;
+        if (!matchesCat) return false;
+        if (!query) return true;
+        return (
+          app.name.toLowerCase().includes(query) ||
+          app.exe.toLowerCase().includes(query) ||
+          app.desc.toLowerCase().includes(query) ||
+          app.formats.toLowerCase().includes(query)
+        );
+      });
+
+      const grid = document.getElementById("appsGrid");
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="pillar-card" style="grid-column: 1 / -1;">No applications matched "${query}".</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((app) => `
+        <article class="app-card">
+          <div>
+            <div class="app-card-top">
+              <div class="app-card-title-wrap">
+                <div class="app-icon-box" style="width: 42px; height: 42px;">
+                  ${renderAppIcon(app.id, app.name)}
+                </div>
+                <div>
+                  <h3>${app.name}</h3>
+                  <div class="app-exe">${app.exe}</div>
+                </div>
+              </div>
+              <span class="badge badge-${app.category}">${app.badgeLabel}</span>
+            </div>
+            <p class="app-desc" style="margin-top: 12px;">${app.desc}</p>
+          </div>
+
+          <div style="display: grid; gap: 10px;">
+            <div class="app-meta-strip">
+              <span>${app.formats}</span>
+              <strong>${app.size}</strong>
+            </div>
+            <div class="app-card-actions">
+              <a href="${getArchiveUrl(app.archive)}" class="btn btn-primary btn-sm">Download ZIP</a>
+              <button type="button" class="btn btn-sm" data-inspect-id="${app.id}">Details</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      grid.querySelectorAll("[data-inspect-id]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetApp = APPS.find((a) => a.id === btn.getAttribute("data-inspect-id"));
+          if (targetApp) openDetailModal(targetApp);
+        });
+      });
+    }
+
+    function openDetailModal(app) {
+      document.getElementById("modalTitle").textContent = `${app.name} — ${SITE_CONFIG.release_tag}`;
+      document.getElementById("modalExe").textContent = `${app.exe} • Archive Size: ${app.size}`;
+      document.getElementById("modalDesc").textContent = app.desc;
+      document.getElementById("modalFormats").innerHTML = `<span>Supported Formats: <strong>${app.formats}</strong></span>`;
+      document.getElementById("modalFeatures").innerHTML = app.features.map((f) => `<li>${f}</li>`).join("");
+      document.getElementById("modalIconBox").innerHTML = renderAppIcon(app.id, app.name);
+
+      const mDl = document.getElementById("modalDownloadBtn");
+      mDl.href = getArchiveUrl(app.archive);
+      mDl.textContent = `Download ${app.archive}`;
+
+      document.getElementById("detailModal").classList.add("open");
+    }
+
+    function openAboutModal() {
+      document.getElementById("aboutModal").classList.add("open");
+    }
+
+    function renderDynamicLinks() {
+      const links = Array.isArray(SITE_CONFIG.ecosystem_links) ? SITE_CONFIG.ecosystem_links : [];
+      const fullUrl = getArchiveUrl(SITE_CONFIG.full_suite_archive);
+      const checksumUrl = getArchiveUrl("SHA256SUMS.txt");
+      const releasesUrl = getReleasesPageUrl();
+
+      document.getElementById("navFullSuiteBtn").href = fullUrl;
+      document.getElementById("heroFullSuiteBtn").href = fullUrl;
+      document.getElementById("heroFullSuiteBtn").textContent = `Download Full Suite ZIP (${SITE_CONFIG.full_suite_size})`;
+      document.getElementById("heroChecksumsBtn").href = checksumUrl;
+      document.getElementById("cardReleasesBtn").href = releasesUrl;
+      document.getElementById("footerFullSuiteLink").href = fullUrl;
+      document.getElementById("footerChecksumsLink").href = checksumUrl;
+
+      const primaryLinks = links.filter((item) => item.primary);
+      document.getElementById("footerPrimaryButtons").innerHTML = primaryLinks.map((item, idx) => `
+        <a
+          href="${item.url}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn ${idx === 0 ? "btn-sage" : "btn-lavender"} btn-sm"
+        >
+          ${getSocialSvg(item.icon)}
+          <span>${item.label} ↗</span>
+        </a>
+      `).join("");
+
+      document.getElementById("footerDynamicLinks").innerHTML = links.map((item) => `
+        <li>
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer">
+            ${getSocialSvg(item.icon)}
+            <span>${item.label} ↗</span>
+          </a>
+        </li>
+      `).join("");
+
+      document.getElementById("aboutEcosystemLinks").innerHTML = links.map((item) => `
+        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="eco-pill">
+          ${getSocialSvg(item.icon)}
+          <span>${item.label} ↗</span>
+        </a>
+      `).join("");
+
+      document.getElementById("mobileDrawerDynamicLinks").innerHTML = links.map((item) => `
+        <a href="${item.url}" target="_blank" rel="noopener noreferrer" data-close-drawer>
+          ${getSocialSvg(item.icon)}
+          <span>${item.label} ↗</span>
+        </a>
+      `).join("");
+
+      const drawer = document.getElementById("mobileDrawer");
+      const menuBtn = document.getElementById("mobileMenuBtn");
+      document.querySelectorAll("[data-close-drawer]").forEach((el) => {
+        el.onclick = () => {
+          drawer.classList.remove("open");
+          menuBtn.setAttribute("aria-expanded", "false");
+          menuBtn.textContent = "Menu";
+        };
+      });
+    }
+
+    async function loadExternalLinksJson() {
+      try {
+        const res = await fetch("./links.json", { cache: "no-store" });
+        if (res.ok) {
+          const parsed = await res.json();
+          if (parsed && typeof parsed === "object") {
+            SITE_CONFIG = { ...DEFAULT_LINKS_CONFIG, ...parsed };
+          }
+        }
+      } catch (_err) {
+        // Fallback to DEFAULT_LINKS_CONFIG when previewed over local file:// without HTTP server
+      }
+    }
+
+    async function initSite() {
+      document.getElementById("brandLogoSlot").innerHTML = renderAppIcon("jaiho_office", "JaihoOffice");
+      document.getElementById("footerLogoSlot").innerHTML = renderAppIcon("jaiho_office", "JaihoOffice");
+      document.getElementById("aboutIconBox").innerHTML = renderAppIcon("jaiho_office", "JaihoOffice");
+
+      await loadExternalLinksJson();
+      renderDynamicLinks();
+
+      document.querySelectorAll("#categoryTabs .tab-btn").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          document.querySelectorAll("#categoryTabs .tab-btn").forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+          activeCategory = tab.getAttribute("data-cat");
+          renderCatalog();
+        });
+      });
+
+      document.getElementById("appSearchInput").addEventListener("input", renderCatalog);
+
+      const menuBtn = document.getElementById("mobileMenuBtn");
+      const drawer = document.getElementById("mobileDrawer");
+      menuBtn.addEventListener("click", () => {
+        const isOpen = drawer.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
+        menuBtn.textContent = isOpen ? "Close" : "Menu";
+      });
+
+      const detailModal = document.getElementById("detailModal");
+      const aboutModal = document.getElementById("aboutModal");
+
+      document.getElementById("modalCloseBtn").addEventListener("click", () => detailModal.classList.remove("open"));
+      detailModal.addEventListener("click", (e) => {
+        if (e.target === detailModal) detailModal.classList.remove("open");
+      });
+
+      document.querySelectorAll("[data-open-about]").forEach((btn) => {
+        btn.addEventListener("click", openAboutModal);
+      });
+      document.getElementById("aboutCloseBtn").addEventListener("click", () => aboutModal.classList.remove("open"));
+      aboutModal.addEventListener("click", (e) => {
+        if (e.target === aboutModal) aboutModal.classList.remove("open");
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          detailModal.classList.remove("open");
+          aboutModal.classList.remove("open");
+        }
+      });
+
+      renderDock();
+      renderStage();
+      renderCatalog();
+    }
+
+    initSite();
+  </script>
+</body>
+</html>
